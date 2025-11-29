@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Opciones de Pago – INPU</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- TIPOGRAFÍAS PROFESIONALES -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        background: #0b0f1a;
+        font-family: "Inter", sans-serif;
+        color: #eef2f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 20px;
+    }
+
+    /* BOTÓN PRINCIPAL */
+    .payment-button {
+        background: #ffc107;
+        color: #111;
+        padding: 14px 26px;
+        font-size: 18px;
+        border-radius: 12px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: 0.25s ease;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    }
+
+    .payment-button:hover {
+        background: #e0a800;
+        transform: translateY(-2px);
+    }
+
+    /* MODAL */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.55);
+        backdrop-filter: blur(6px);
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        padding: 20px;
+    }
+
+    .modal-box {
+        background: #111827;
+        border-radius: 18px;
+        padding: 28px;
+        width: 95%;
+        max-width: 480px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.55);
+        border: 1px solid rgba(255,255,255,0.08);
+        animation: fadeIn .25s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(.88); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-box h2 {
+        margin: 0 0 20px 0;
+        text-align: center;
+        font-size: 26px;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    .payment-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.8;
+        color: #d5d9e5;
+    }
+
+    .payment-list li {
+        background: rgba(255,255,255,0.06);
+        padding: 10px 14px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .close-btn {
+        margin-top: 25px;
+        width: 100%;
+        padding: 12px;
+        background: #3f6be1;
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: .2s;
+    }
+
+    .close-btn:hover {
+        background: #3158c9;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- BOTÓN PRINCIPAL -->
+<button class="payment-button" onclick="openPaymentModal()">
+    💳 Consultar Opciones de Pago
+</button>
+
+<!-- POPUP -->
+<div id="payment-modal" class="modal-overlay" onclick="closePaymentModal()">
+
+    <div class="modal-box" onclick="event.stopPropagation();">
+        <h2>Opciones de Pago</h2>
+
+        <ul class="payment-list">
+            <li>💵 <strong>Efectivo</strong> – Pagas directamente en nuestras instalaciones.</li>
+            <li>🏦 <strong>Transferencia Bancaria</strong> – A cuentas Bancolombia o Nu Colombia.</li>
+            <li>📱 <strong>Nequi</strong> – Pagos rápidos desde tu celular.</li>
+            <li>📱 <strong>BRE-B</strong> – Transferencia instantánea.</li>
+            <li>🏧 <strong>Corresponsales Bancarios</strong> – Si no tienes app.</li>
+        </ul>
+
+        <button class="close-btn" onclick="closePaymentModal()">Cerrar</button>
+    </div>
+
+</div>
+
+<script>
+function openPaymentModal() {
+    document.getElementById("payment-modal").style.display = "flex";
+}
+
+function closePaymentModal() {
+    document.getElementById("payment-modal").style.display = "none";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1356 @@
+/* ================================================= */
+/* 01. VARIABLES Y RESET BÁSICO */
+/* ================================================= */
+
+/* Variables CSS Personalizadas */
+:root {
+    --primary-color: #ffffff;
+    --secondary-color: #007bff; /* Azul UNAL/Tecnológico */
+    --accent-color: #ffc107; /* Amarillo/Dorado para destacar */
+    --text-color: #333;
+    --white-color: #ffffff;
+    --light-bg: #000000; /* Fondo oscuro */
+    --gray-bg: #f5f5f5; /* Fondo gris claro profesional */
+}
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white-color);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Títulos Generales */
+h3 {
+    text-align: center;
+    font-size: 2.8em;
+    margin-bottom: 50px;
+    font-weight: 900;
+}
+
+/* Secciones Generales */
+section {
+    padding: 80px 0;
+}
+
+/* Secciones de Contraste */
+section:nth-child(even) {
+    background-color: var(--light-bg);
+    color: var(--white-color);
+}
+
+.features, .testimonials, .blog-guia {
+    background-color: var(--gray-bg);
+    color: var(--text-color);
+}
+
+.contact {
+    background-color: var(--white-color);
+    color: var(--text-color);
+}
+
+/* Estilos de H3 por Sección */
+.testimonials h3, .contact h3, .blog-guia h3 {
+    color: var(--text-color);
+}
+
+.features h3 {
+    color: var(--text-color);
+}
+
+.courses h3 {
+    color: var(--text-color);
+}
+
+.courses p.section-description {
+    color: var(--text-color) !important;
+}
+
+/* ================================================= */
+/* 02. ESTILOS DE BOTONES (CTAs) */
+/* ================================================= */
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-weight: 700;
+    transition: background-color 0.3s;
+    border: none;
+    text-align: center;
+}
+
+.cta-button:hover {
+    background-color: #0056a0;
+}
+
+.whatsapp-cta-button {
+    display: block;
+    background-color: #25D366;
+    color: var(--white-color);
+    padding: 10px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: 700;
+    font-size: 1.2em;
+    transition: background-color 0.3s, transform 0.3s;
+    border: none;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.whatsapp-cta-button i {
+    margin-right: 10px;
+}
+
+.whatsapp-cta-button:hover {
+    background-color: #1EBE57;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.secondary-cta {
+    display: inline-block;
+    background: none;
+    color: var(--secondary-color);
+    padding: 10px 0;
+    text-decoration: none;
+    font-weight: 700;
+    border-bottom: 2px solid var(--secondary-color);
+    transition: all 0.3s;
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.secondary-cta:hover {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+}
+
+
+/* ================================================= */
+/* 03. HEADER Y NAVEGACIÓN (RESPONSIVE) */
+/* ================================================= */
+
+.header {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
+/* --- ESTILOS DEL BOTÓN HAMBURGUESA (OCULTO POR DEFECTO) --- */
+.menu-toggle {
+    display: none; /* Oculto en escritorio */
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 2em;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 1001;
+    
+    flex-direction: column;
+    justify-content: space-around;
+    height: 25px;
+    width: 30px;
+    padding: 0;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+    transition: all 0.3s ease;
+    display: block;
+}
+
+/* Estilos de la 'X' */
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+}
+/* --- FIN ESTILOS DEL BOTÓN HAMBURGUESA --- */
+
+/* Menú en escritorio */
+.nav {
+    display: flex;
+}
+
+.nav a {
+    color: #000000;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 400;
+    transition: color 0.3s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.nav a:hover {
+    color: var(--accent-color);
+}
+
+.nav a.active {
+    color: var(--secondary-color);
+    font-weight: 700;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+#btn-matricula {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s;
+    margin-left: 25px;
+    border: none;
+}
+
+#btn-matricula:hover {
+    background-color: #e0a800;
+}
+
+/* --- MENÚ EN MÓVIL --- */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex; /* Se muestra el botón */
+    }
+
+    .nav {
+        display: none;        /* Oculto por defecto */
+        flex-direction: column;
+        width: 100%;
+        background: #111 !important;
+        padding: 10px 0 !important;
+    }
+
+    .nav.active {
+        display: flex;        /* Se muestra cuando se abre */
+    }
+
+    .nav a {
+        color: #fff !important;
+        padding: 12px 0 !important;
+        margin: 5px 0 !important;
+        font-size: 1.1em;
+        text-align: center;
+        width: 100%;
+    }
+
+    #btn-matricula {
+        background-color: var(--accent-color) !important;
+        color: #111 !important;
+        margin-top: 10px;
+        text-align: center;
+        padding: 10px 0;
+    }
+}
+
+
+/* ================================================= */
+/* 04. SECCIÓN HERO (PRINCIPAL) */
+/* ================================================= */
+
+.hero {
+    background: url('imagen\ logo.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    text-align: center;
+    padding: 100px 20px;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    z-index: -1;
+}
+
+.hero .container {
+    display: block;
+}
+
+.hero-content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text-side {
+    width: 55%;
+    padding-right: 20px;
+    text-align: left;
+}
+
+.hero h2, .hero p, .hero .cta-button, .hero .whatsapp-cta-button {
+    color: var(--white-color);
+    z-index: 2;
+    position: relative;
+}
+
+.hero h2 {
+    font-size: 3.5em;
+    margin-bottom: 15px;
+    color: #ffffff;
+    text-shadow:
+        1px 1px 0px #000,
+        2px 2px 0px #000,
+        3px 3px 0px #000,
+        4px 4px 0px #000,
+        5px 5px 10px rgba(0, 0, 0, 0.6);
+    line-height: 1.1;
+}
+
+.hero p {
+    font-size: 1.3em;
+    max-width: none;
+    margin: 0 0 30px 0;
+    color: #ffffff;
+    text-shadow:
+        1px 1px 0px #000,
+        2px 2px 0px rgba(0, 0, 0, 0.7);
+}
+
+.hero-form {
+    width: 40%;
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.98);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    text-align: left;
+    color: var(--text-color);
+}
+
+.hero-form h4 {
+    color: var(--secondary-color);
+}
+
+.hero-form .form-fields-container {
+    display: block;
+    gap: 0;
+    margin-bottom: 5px;
+}
+
+.hero-form .form-group {
+    flex: none;
+    margin-bottom: 10px;
+}
+
+.hero-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.hero-form input[type="text"],
+.hero-form input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    color: var(--text-color);
+    background-color: var(--white-color);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.hero-social-links {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.hero-social-links p {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+
+.hero-social-links a {
+    font-size: 22px;
+    color: #000000cc;
+    margin: 0 10px;
+    transition: all 0.25s ease;
+}
+
+.hero-social-links a:hover {
+    color: #000000;
+    transform: translateY(-3px);
+}
+.hero-social-links .fa-tiktok:hover {
+    color: var(--light-bg);
+}
+
+
+/* ================================================= */
+/* 05. SECCIÓN FEATURES (VENTAJAS CLAVE) */
+/* ================================================= */
+
+.features {
+    padding: 80px 0;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: var(--white-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.feature-icon {
+    font-size: 2.5em;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    display: block;
+}
+
+.feature-card h4 {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.feature-card p {
+    color: #000000;
+}
+
+
+/* ================================================= */
+/* 06. SECCIÓN CURSOS */
+/* ================================================= */
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.course-card {
+    background-color: var(--white-color);
+    padding: 35px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    color: var(--text-color);
+    border-bottom: 5px solid transparent;
+}
+
+.course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    border-bottom: 5px solid var(--accent-color);
+}
+
+.course-card h4 {
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.course-card p {
+    font-size: 1em;
+    color: #666;
+    line-height: 1.5;
+}
+
+.course-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--white-color);
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.1);
+    transition: background-color 0.3s;
+}
+
+.icon-math::before {
+    content: "🎓";
+}
+
+.icon-social::before {
+    content: "⚡";
+}
+
+.icon-intensive::before {
+    content: "📚";
+}
+
+.course-card:hover .course-icon {
+    background-color: var(--accent-color);
+}
+
+/* ================================================= */
+/* 07. SECCIÓN DE PRECIOS Y CTA */
+/* ================================================= */
+
+.price-cta {
+    background-color: var(--light-bg);
+    color: var(--white-color);
+    text-align: center;
+    padding: 60px 0;
+}
+
+.price-title {
+    color: var(--accent-color);
+    margin-bottom: 40px;
+}
+
+.price-box {
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 30px 40px;
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    border: 3px solid var(--secondary-color);
+}
+
+.unique-detail {
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #333;
+    color: var(--accent-color);
+}
+
+.unique-detail i {
+    color: var(--white-color);
+    margin-right: 10px;
+}
+
+.price-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.price-column {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.price-highlight {
+    background-color: #004d99;
+    color: var(--white-color);
+    text-align: center;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid var(--accent-color);
+}
+
+.before-price {
+    font-size: 1em;
+    margin-bottom: 0px;
+    color: #ccc;
+    font-weight: 400;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #ff8888;
+    font-weight: 700;
+    font-size: 1.2em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.current-price {
+    font-size: 1.2em;
+    margin: 10px 0 0;
+    font-weight: 700;
+    color: var(--white-color);
+}
+
+.promo-date {
+    font-size: 0.9em;
+    font-style: italic;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+}
+
+.final-price {
+    font-size: 3.5em;
+    font-weight: 900;
+    line-height: 1.1;
+}
+
+.accent-price {
+    color: var(--accent-color);
+}
+
+.detail-card {
+    background-color: #2a2a2a;
+    padding: 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 5px solid var(--accent-color);
+}
+
+.detail-card h4 {
+    color: var(--white-color);
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.detail-card h4 i {
+    color: var(--accent-color);
+    margin-right: 8px;
+}
+
+.detail-card p {
+    font-size: 0.95em;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+.schedule-details ul {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+    margin-top: 5px;
+}
+
+.schedule-details ul li {
+    position: relative;
+    margin-bottom: 5px;
+    padding-left: 20px;
+}
+
+.schedule-details ul li::before {
+    content: '→';
+    color: var(--secondary-color);
+    position: absolute;
+    left: 0;
+    font-size: 1em;
+}
+
+.recording-note {
+    font-style: italic;
+    color: #888;
+    margin-top: 10px;
+}
+
+.payment-icons {
+    color: var(--white-color);
+    font-weight: 500;
+}
+
+.payment-methods .secondary-cta {
+    margin-top: 10px;
+    display: inline-block;
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+}
+.payment-methods .secondary-cta:hover {
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.payment-options {
+    margin-top: 10px;
+}
+
+.payment-item {
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--white-color);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.payment-logo {
+    height: 20px;
+    width: auto;
+    margin-left: 10px;
+    border-radius: 3px;
+    vertical-align: middle;
+}
+
+.price-cta .whatsapp-cta-button {
+    margin-top: 20px;
+    max-width: 500px;
+}
+
+/* ================================================= */
+/* 08. SECCIÓN BLOG/GUÍA */
+/* ================================================= */
+
+.blog-guia {
+    padding: 60px 0;
+    text-align: left;
+}
+
+.blog-guia h3 {
+    color: var(--secondary-color);
+    font-size: 2.2em;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.guia-intro {
+    background-color: #e9f3ff;
+    padding: 30px;
+    border-left: 5px solid var(--secondary-color);
+    border-radius: 5px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.guia-intro h4 {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.guia-item {
+    padding: 30px;
+    background-color: var(--white-color);
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    border-top: 5px solid var(--accent-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.guia-item:hover {
+    transform: translateY(0);
+    border-color: var(--secondary-color);
+    background-color: #fcfcfc;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.guia-icon {
+    font-size: 2.5em;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    position: static;
+    opacity: 1;
+    display: block;
+    float: right;
+    margin-left: 15px;
+    margin-top: -5px;
+}
+
+.guia-item:hover .guia-icon {
+    opacity: 1;
+}
+
+.guia-item h4 {
+    color: var(--secondary-color);
+    font-size: 1.4em;
+    font-weight: 900;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.guia-item p {
+    font-size: 0.95em;
+    color: var(--text-color);
+}
+
+.guia-item ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 15px;
+    border-left: none;
+    padding-left: 0;
+}
+
+.guia-item ul li {
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    line-height: 1.4;
+    position: relative;
+    padding-left: 20px;
+}
+
+.guia-item ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--secondary-color);
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.blog-grid .whatsapp-cta-button {
+    grid-column: 1 / -1;
+    max-width: 500px;
+    margin: 40px auto 10px !important;
+}
+
+
+/* ================================================= */
+/* 09. SECCIÓN TESTIMONIOS */
+/* ================================================= */
+
+.testimonials {
+    text-align: center;
+}
+
+.testimonial-quote {
+    font-style: italic;
+    font-size: 1.4em;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    padding: 20px;
+    border-left: 5px solid var(--accent-color);
+    background-color: var(--white-color);
+    border-radius: 5px;
+}
+
+.testimonial-quote footer {
+    margin-top: 15px;
+    font-size: 0.9em;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.testimonial-card {
+    background-color: var(--white-color);
+    padding: 25px;
+    border-radius: 10px;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid var(--secondary-color);
+    transition: transform 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.student-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.student-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    border: 2px solid var(--accent-color);
+    background-color: var(--gray-bg);
+}
+
+.puntaje {
+    font-weight: 700;
+    color: #cc0000;
+    font-size: 1.1em;
+    flex-grow: 1;
+    text-align: right;
+}
+
+.quote-text {
+    font-style: italic;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.student-footer {
+    font-weight: 700;
+    color: var(--secondary-color);
+    font-size: 0.95em;
+    display: block;
+    text-align: right;
+}
+
+.required-scores-section {
+    max-width: 800px;
+    margin: 40px auto 0;
+    padding: 40px;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-left: 5px solid var(--accent-color);
+}
+
+.required-scores-section h4 {
+    font-size: 1.8em;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    font-weight: 900;
+}
+
+.required-scores-section p {
+    font-size: 1em;
+    margin-bottom: 25px;
+    color: #555;
+}
+
+.score-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    display: inline-block;
+    text-align: left;
+}
+
+.score-list li {
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.score-list li i {
+    color: var(--accent-color);
+    margin-right: 10px;
+}
+
+.download-button {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    font-weight: 700;
+    padding: 12px 30px;
+    border: none;
+}
+
+.download-button:hover {
+    background-color: #e0a800;
+    color: var(--text-color);
+}
+
+
+/* ================================================= */
+/* 10. SECCIÓN CONTACTO Y FORMULARIO */
+/* ================================================= */
+
+.contact form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--white-color);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    color: var(--text-color);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* ================================================= */
+/* 11. FOOTER */
+/* ================================================= */
+
+.footer {
+    background: #111;
+    color: #fff;
+    padding: 40px 0 20px;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footer-section p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: #bbb;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #fff;
+}
+
+.social-icons a {
+    font-size: 26px;
+    margin-right: 12px;
+    color: #bbb;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: #fff;
+    transform: scale(1.15);
+}
+
+.footer-bottom {
+    margin-top: 30px;
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+}
+
+.footer-bottom p {
+    font-size: 13px;
+    color: #aaa;
+}
+
+
+/* ================================================= */
+/* 12. MEDIA QUERIES PARA DISPOSITIVOS MÓVILES */
+/* ================================================= */
+
+@media (max-width: 992px) {
+    .price-details-grid {
+        grid-template-columns: 1fr;
+    }
+    .price-highlight {
+        padding: 20px;
+    }
+    .payment-logo {
+        height: 18px;
+    }
+    .testimonial-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    /* --- HEADER/NAVEGACIÓN MÓVIL (Punto crucial de tu solicitud) --- */
+    
+    /* 1. MOSTRAR LA HAMBURGUESA */
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* 2. OCULTAR EL MENÚ POR DEFECTO EN MÓVIL */
+    .nav {
+        display: none; /* Oculto por defecto en móvil */
+        
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: var(--primary-color);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        flex-direction: column;
+        padding: 10px 0;
+    }
+
+    /* 3. MOSTRAR EL MENÚ CUANDO TIENE LA CLASE 'active' */
+    .nav.active {
+        display: flex;
+    }
+
+    /* 4. Estilos de los enlaces en el menú desplegado */
+    .nav a {
+        margin: 5px 20px;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        color: #000000;
+    }
+
+    .nav a:last-child {
+        border-bottom: none;
+    }
+    
+    #btn-matricula {
+        background: none;
+        color: var(--secondary-color);
+        padding: 10px 0;
+        margin-left: 20px;
+        margin-right: 20px;
+        border-radius: 0;
+        border: none;
+        font-weight: 700;
+    }
+    /* --- FIN HEADER/NAVEGACIÓN MÓVIL --- */
+
+
+    /* Sección Hero Móvil */
+    .hero {
+        padding: 60px 20px;
+        min-height: 450px;
+    }
+
+    .hero-content-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text-side {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    .hero h2, .hero p {
+        text-align: center;
+    }
+
+    .hero h2 {
+        font-size: 2.5em;
+        text-shadow:
+            1px 1px 0px #000,
+            2px 2px 0px #000,
+            3px 3px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero p {
+        font-size: 1.1em;
+        text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.7);
+    }
+
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .whatsapp-cta-button {
+        padding: 12px 20px;
+        font-size: 1.1em;
+    }
+
+    .hero-form {
+        width: 100%;
+        max-width: 400px;
+        margin: 20px auto 0;
+    }
+
+    /* Secciones Generales en móvil */
+    section {
+        padding: 40px 0;
+    }
+
+    h3 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+
+    .blog-guia h3 {
+        font-size: 1.8em;
+    }
+
+    .guia-intro {
+        padding: 15px;
+    }
+
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .guia-item {
+        padding: 20px;
+    }
+
+    .guia-icon {
+        font-size: 2em;
+        top: 10px;
+        float: none;
+        margin: 0 0 10px 0;
+    }
+
+    .guia-item h4 {
+        padding-right: 0;
+    }
+
+    .course-grid, .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .course-icon, .feature-icon {
+        font-size: 2em;
+    }
+
+    .feature-card {
+        padding: 20px;
+    }
+
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonial-card {
+        padding: 20px;
+    }
+
+    .required-scores-section {
+        padding: 20px;
+    }
+
+    .testimonial-quote {
+        font-size: 1.1em;
+        padding: 15px;
+    }
+
+    .price-box {
+        padding: 20px;
+    }
+    .final-price {
+        font-size: 3em;
+    }
+    .current-price {
+        font-size: 1.3em;
+    }
+}

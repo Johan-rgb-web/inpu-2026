@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Instituto Nacional De Preparación Universitaria - Calendario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="inpu.png"> 
+
+<!-- TIPOGRAFÍAS -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(180deg, #0a0f18, #111726 120%);
+        color: #eef2f8;
+        padding: 40px 0;
+    }
+
+    h1 {
+        text-align: center;
+        font-family: "Playfair Display", serif;
+        font-size: 40px;
+        margin-bottom: 6px;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #b6c0d3;
+        margin-bottom: 35px;
+    }
+
+    .calendar-container {
+        max-width: 930px;
+        margin: auto;
+        background: rgba(255,255,255,0.04);
+        padding: 30px;
+        border-radius: 22px;
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.06);
+        box-shadow: 0px 12px 35px rgba(0,0,0,0.45);
+    }
+
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .calendar-header h2 {
+        margin: 0;
+        font-size: 26px;
+    }
+
+    .nav-btn {
+        background: #ffc107;
+        color: #111;
+        border: none;
+        padding: 9px 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .nav-btn:hover {
+        background: #e0a800;
+        transform: translateY(-1px);
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 14px;
+    }
+
+    .day-name {
+        text-align: center;
+        font-size: 13px;
+        letter-spacing: 0.6px;
+        color: #9daac0;
+        font-weight: 600;
+    }
+
+    /* TARJETAS NORMALES */
+    .day {
+        padding: 12px;
+        border-radius: 15px;
+        background: #121a2c;
+        border: 1px solid rgba(255,255,255,0.06);
+        min-height: 90px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        transition: 0.25s;
+        cursor: pointer;
+        position: relative;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    }
+
+    /* TARJETA SELECCIONADA (SE AGRANDA) */
+    .day.expanded {
+        background: #1a2336;
+        transform: scale(1.22);
+        z-index: 10;
+        min-height: 180px;
+        border: 1px solid #4f79ff;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    .day-number {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .event-label {
+        margin-top: 10px;
+        background: #25D366;
+        color: #0a2712;
+        padding: 4px 10px;
+        font-size: 12px;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    .event-info {
+        margin-top: 12px;
+        font-size: 13px;
+        text-align: center;
+        line-height: 1.4;
+        padding: 8px;
+        background: rgba(255,255,255,0.06);
+        border-radius: 10px;
+    }
+
+    /* COLORES ESPECIALES */
+    .induction {
+        border-color: #2bd46c !important;
+    }
+    .start-class {
+        border-color: #3f6be1 !important;
+    }
+    .highlight {
+        border-color: #ffc107 !important;
+    }
+
+    .empty {
+        background: none;
+        border: none;
+        box-shadow: none;
+        cursor: default;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Calendario del Curso</h1>
+<p class="subtitle">Clases desde el 12 de enero hasta el 22 de abril de 2026</p>
+
+<div class="calendar-container">
+
+    <div class="calendar-header">
+        <button class="nav-btn" id="prev-month">← Mes anterior</button>
+        <h2 id="month-label"></h2>
+        <button class="nav-btn" id="next-month">Mes siguiente →</button>
+    </div>
+
+    <div class="calendar-grid" id="calendar"></div>
+
+</div>
+
+<script>
+    const startDate = new Date(2026, 0, 12);
+    const inductionDays = [12, 13];
+    const endDate = new Date(2026, 3, 22);
+
+    let currentMonth = 0;
+    const monthNames = ["Enero 2026","Febrero 2026","Marzo 2026","Abril 2026"];
+
+    function getEvent(day, month) {
+        if (month === 0 && inductionDays.includes(day)) return "Inducción del curso: presentación del programa, metodología y bienvenida.";
+        if (new Date(2026, month, day).getTime() === startDate.getTime()) return "Inicio oficial del curso.";
+        if (new Date(2026, month, day).getTime() === endDate.getTime()) return "Finalización del curso.";
+        return null;
+    }
+
+    function generateCalendar(monthIndex) {
+        const calendar = document.getElementById("calendar");
+        const label = document.getElementById("month-label");
+        calendar.innerHTML = "";
+        label.textContent = monthNames[monthIndex];
+
+        const year = 2026;
+        const month = monthIndex;
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        const dayNames = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
+        dayNames.forEach(name => {
+            const div = document.createElement("div");
+            div.className = "day-name";
+            div.textContent = name;
+            calendar.appendChild(div);
+        });
+
+        for (let i = 0; i < firstDay; i++) {
+            const empty = document.createElement("div");
+            empty.className = "empty";
+            calendar.appendChild(empty);
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            const div = document.createElement("div");
+            div.className = "day";
+
+            div.innerHTML = `<div class="day-number">${day}</div>`;
+
+            const eventText = getEvent(day, month);
+            if (eventText) {
+                div.innerHTML += `<div class="event-label">Evento</div>`;
+            }
+
+            // Colores especiales
+            if (month === 0 && inductionDays.includes(day)) div.classList.add("induction");
+            if (new Date(2026, month, day).getTime() === startDate.getTime()) div.classList.add("start-class");
+            if (new Date(2026, month, day).getTime() === endDate.getTime()) div.classList.add("highlight");
+
+            // CLICK PARA EXPANDIR
+            div.addEventListener("click", () => {
+                document.querySelectorAll(".day").forEach(d => d.classList.remove("expanded"));
+                div.classList.add("expanded");
+
+                const info = eventText ? eventText : "No hay nada disponible para este día.";
+
+                div.innerHTML = `
+                    <div class="day-number">${day}</div>
+                    <div class="event-info">${info}</div>
+                `;
+            });
+
+            calendar.appendChild(div);
+        }
+    }
+
+    document.getElementById("prev-month").addEventListener("click", () => {
+        if (currentMonth > 0) currentMonth--;
+        generateCalendar(currentMonth);
+    });
+
+    document.getElementById("next-month").addEventListener("click", () => {
+        if (currentMonth < 3) currentMonth++;
+        generateCalendar(currentMonth);
+    });
+
+    generateCalendar(0);
+</script>
+
+</body>
+</html>
